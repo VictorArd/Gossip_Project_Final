@@ -1,0 +1,19 @@
+<br>
+<h2 class="display-4 text-center">User n°<%= @user.id%></h2>
+<p class="lead text-center">
+  ici tu pourras retrouver les informations de l'utilisateur que tu recherche.
+</p>
+
+<hr width="75%" color=white>
+<br><br>
+
+  <div class="card bg-light mx-auto" style="max-width: 40rem;">
+    <div class="card-header"><span class="font-weight-bold">Nom: </span><%= @user.first_name + ' ' + @user.last_name %></div>
+    <div class="card-body">
+      <h5 class="card-text"><span class="font-weight-bold">Description: </span> <br> <span class="text-dark small"> <%= @user.description %> </span></h5>
+      <hr width="30%" color=white>
+      <h5 class="card-text"><span class="font-weight-bold">Age: </span> <span class="text-dark small"> <%= @user.age %> </span></h5>
+      <hr width="30%" color=white>
+      <h5 class="card-text"><span class="font-weight-bold">Email: </span> <span class="text-dark small"> <%= @user.email %> </span></h5>
+    </div>
+  </div>
