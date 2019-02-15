@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_14_101716) do
+ActiveRecord::Schema.define(version: 2019_02_14_105712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,16 @@ ActiveRecord::Schema.define(version: 2019_02_14_101716) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.bigint "gossip_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gossip_id"], name: "index_comments_on_gossip_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "gossips", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -29,6 +39,17 @@ ActiveRecord::Schema.define(version: 2019_02_14_101716) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_gossips_on_user_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "gossip_id"
+    t.bigint "comment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_likes_on_comment_id"
+    t.index ["gossip_id"], name: "index_likes_on_gossip_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "private_messages", force: :cascade do |t|
@@ -42,8 +63,10 @@ ActiveRecord::Schema.define(version: 2019_02_14_101716) do
 
   create_table "tags", force: :cascade do |t|
     t.string "title"
+    t.bigint "gossip_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["gossip_id"], name: "index_tags_on_gossip_id"
   end
 
   create_table "users", force: :cascade do |t|
