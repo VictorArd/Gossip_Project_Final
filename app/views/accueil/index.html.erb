@@ -1,2 +1,28 @@
-<h1>Accueil#show</h1>
-<p>Find me in app/views/accueil/show.html.erb</p>
+<br>
+<h2 class="display-4 text-center">Bienvenue sur la page des potins</h2>
+<p class="lead text-center">
+  ici tu pourras retrouver tous les potins du site internet.
+</p>
+
+<hr width="75%" color=white>
+
+<br>
+<div class="container">
+     <div class="row">
+       <% @gossips.each do |gossip| %>
+         <div class="col-md-4">
+           <div class="card text-center shadow p-3 mb-5 bg-light rounded" style="width: 20rem;">
+             <div class="bg-light">
+               <div class="card-body">
+                 <h5 class="card-title"><%= gossip.title %></h5>
+                 <h6 class="card-subtitle mb-2 text-muted"><%= gossip.user.first_name %> <%= gossip.user.last_name %></h6>
+                 <p class="card-text"><%= gossip.content %></p>
+                 <a href="#" class="card-link">Editer</a>
+                 <a href="#" class="card-link">Supprimer</a>
+               </div>
+             </div>
+           </div> <br>
+         </div>
+       <% end %>
+     </div>
+</div>
