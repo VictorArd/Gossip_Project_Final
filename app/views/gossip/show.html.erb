@@ -1,0 +1,17 @@
+<br>
+<h2 class="display-4 text-center">Potin n°<%= @gossip.id%></h2>
+<p class="lead text-center">
+  ici tu pourras retrouver le potin que tu recherche.
+</p>
+
+<hr width="75%" color=white>
+<br><br>
+
+  <div class="card bg-light mx-auto text-center" style="max-width: 40rem;">
+    <div class="card-header">Titre: <%= @gossip.title %></div>
+    <div class="card-body">
+      <h5 class="card-title">Contenu: <%= @gossip.content %></h5>
+      <hr width="30%" color=white>
+      <p class="card-text text-muted">Auteur: <%= @gossip.user.first_name %> <%= @gossip.user.last_name %></p>
+    </div>
+  </div>
