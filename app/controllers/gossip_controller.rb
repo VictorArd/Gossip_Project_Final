@@ -14,7 +14,7 @@ class GossipController < ApplicationController
     p '*' * 60
     p params
     p '*' * 60
-    @gossip = Gossip.new(title: params[:title], content: params[:content], user_id: 67)
+    @gossip = Gossip.new(title: params[:title], content: params[:content], user: User.find_by(first_name: 'Anonymous'))
 
       if @gossip.save
         flash[:success] = "Votre potin a été créé!"
