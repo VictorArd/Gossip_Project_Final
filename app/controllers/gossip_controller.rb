@@ -24,4 +24,34 @@ class GossipController < ApplicationController
         render :new
     end
   end
+
+  def edit
+    @gossip = Gossip.find(params[:id])
+  end
+
+  def update
+    @gossip = Gossip.find(params[:id])
+    post_params = params.require(:gossip).permit(:title, :content)
+
+    if @gossip.update(post_params)
+      flash[:success] = "Votre potin a été modifié!"
+      redirect_to gossip_path(@gossip.id)
+    else
+      flash[:danger] = "Une erreur est survenue, veuillez réessayer"
+      render :edit
+    end
+  end
+
+  def destroy
+    @gossip = Gossip.find(params[:id])
+
+    if @gossip.destroy
+      flash[:success] = "Votre potin a été supprimé avec succès!"
+      redirect_to :root
+    else
+      flash[:danger] = "Une erreur est survenue, veuillez réessayer"
+      render gossip_path
+    end
+  end
+
 end

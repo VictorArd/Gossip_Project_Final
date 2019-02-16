@@ -5,15 +5,20 @@
 </p>
 
 <hr width="75%" color=white>
-<br><br>
+<br>
 
   <div class="card bg-light mx-auto text-center shadow bg-light rounded" style="max-width: 40rem;">
     <div class="card-header">Titre: <%= @gossip.title %></div>
     <div class="card-body">
       <h5 class="card-title">Contenu: <%= @gossip.content %></h5>
-      <hr width="30%" color=white>
+        <hr width="30%" color=white>
       <p class="card-text text-muted">Auteur: <%= link_to @gossip.user.first_name + ' ' + @gossip.user.last_name, user_path(@gossip.user.id), :class => "link text-dark"%></p>
-      <hr width="30%" color=white>
+        <hr width="30%" color=white>
       <p class="card-text text-muted">Ville: <%= link_to @gossip.user.city.name, city_path(@gossip.user.city.id), :class => "link text-dark"%></p>
+        <hr width="30%" color=white>
+      <p class="card-link d-inline"><%= link_to "Editer", edit_gossip_path(@gossip.id), :class => "text-info"%></p>
+      <p class="card-link inline d-inline"><%= link_to "Supprimer", gossip_path(@gossip.id), :class => "text-danger", data: { confirm: "Etes-vous sur de vouloir supprimer le potin ?", method: 'DELETE' }%></p>
     </div>
   </div>
+
+  <br>
