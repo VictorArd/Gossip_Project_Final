@@ -1,0 +1,39 @@
+<br>
+<h2 class="display-4 text-center">Ville n°<%= @city.id%></h2>
+<p class="lead text-center">
+  ici tu pourras retrouver les informations de la ville que tu recherche.
+</p>
+
+<hr width="75%" color=white>
+<br>
+
+  <div class="card bg-light mx-auto shadow rounded" style="max-width: 40rem;">
+    <div class="card-body">
+      <h5 class="card-text"><span class="font-weight-bold">Nom: </span> <br> <span class="text-dark small"><%= @city.name %> </span></h5>
+      <hr width="75%" color=white>
+      <h6 class="card-text"><span class="font-weight-bold">Code postal: </span> <br> <span class="text-dark small"><%= @city.zip_code %></span></h6>
+    </div>
+  </div>
+<br>
+
+<hr width="75%" color=white>
+<br>
+
+<div class="container">
+  <div class="row">
+    <% @city.users.each do |user| %>
+	    <% user.gossips.each do |gossip| %>
+        <div class="card bg-light mx-auto text-center shadow bg-light rounded" style="width: 20rem;">
+          <div class="card-header"><%= link_to "Potin N°#{gossip.id}", gossip_path(gossip.id), :class => "link text-dark"%></div>
+        <div class="card-body">
+          <h5 class="card-title">Titre: <%= gossip.title %></h5>
+          <hr width="30%" color=white>
+          <h5 class="card-title">Contenu: <%= gossip.content %></h5>
+          <hr width="30%" color=white>
+          <p class="card-text text-muted">Auteur: <%= link_to gossip.user.first_name + ' ' + gossip.user.last_name, user_path(gossip.user.id), :class => "link text-dark"%></p>
+        </div>
+        </div>
+      <% end %>
+    <% end %>
+ </div>
+</div>
