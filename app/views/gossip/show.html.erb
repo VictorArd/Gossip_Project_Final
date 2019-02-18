@@ -14,10 +14,13 @@ ici tu pourras retrouver le potin que tu recherche.
       <hr width="30%" color=white>
     <p class="card-text text-muted">Auteur: <%= link_to @gossip.user.first_name + ' ' + @gossip.user.last_name, user_path(@gossip.user.id), :class => "link text-dark"%></p>
       <hr width="30%" color=white>
+
       <h5>Tags :</h5>
       <% @gossip.tags.each do |tag| %>
       <%= tag.title %><br /><br />
-      <% end %>        <hr width="30%" color=white>
+      <% end %>
+
+      <hr width="30%" color=white>
     <p class="card-link d-inline"><%= link_to "Editer", edit_gossip_path(@gossip.id), :class => "text-info"%></p>
     <p class="card-link inline d-inline"><%= link_to "Supprimer", gossip_path(@gossip.id), :class => "text-danger", data: { confirm: "Etes-vous sur de vouloir supprimer le potin ?", method: 'DELETE' }%></p>
   </div>

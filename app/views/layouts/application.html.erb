@@ -22,6 +22,16 @@
           <%= link_to "Team", team_index_path, class: "nav-item nav-link text-light" %>
           <%= link_to "Contact", contact_index_path, class: "nav-item nav-link text-light" %>
         </div>
+        <div class="dropdown ml-auto">
+          <button class="btn btn-light btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            S'inscrire / Se connecter
+          </button>
+          <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+            <%= link_to 'INSCRIPTION', team_index_path, class: "dropdown-item ml-auto"%>
+            <hr width="50%" color=white>
+            <%= link_to 'SE CONNECTER', team_index_path, class: "dropdown-item ml-auto"%>
+          </div>
+        </div>
       </div>
     </nav>
 

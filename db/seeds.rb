@@ -61,6 +61,7 @@ p '#' * 60
                 last_name: Faker::Name.last_name,
                 description: Faker::Quote.unique.matz,
                 email: Faker::Internet.unique.email,
+                password: Faker::Internet.unique.password(min_length = 8, max_length = 16, mix_case = true, special_chars = false),
                 age: Faker::Number.within(1..60),
                 city_id: rand(City.first.id..City.last.id)
               )
@@ -70,7 +71,7 @@ p '#' * 60
   p '*' * 60
 
   10.times do
-  Gossip.create!( title: Faker::Book.title,
+  Gossip.create!( title: Faker::Job.unique.field,
                   content: Faker::Marketing.buzzwords,
                   user_id: rand(User.first.id..User.last.id)
               )
@@ -123,4 +124,17 @@ p '#' * 60
   end
   p 'Création de Messages Privées dans la BD'
 
+  p '*' * 60
+  User.create!( first_name: 'Anonymous',
+                last_name: 'caché',
+                description: "Je suis une personne qui n'existe pas",
+                email: "anony@mous.fr",
+                password: 'Anonymous',
+                age: 1890,
+                city_id: rand(City.first.id..City.last.id)
+              )
+  p "Création de l'utilisateur 'Anonymous'"
+  p '*' * 60
+
+  p '#' * 60
   p '#' * 60
