@@ -56,12 +56,13 @@ p '#' * 60
 
   p '*' * 60
 
-  10.times do
+  10.times do |number|
   User.create!( first_name: Faker::Name.first_name,
                 last_name: Faker::Name.last_name,
                 description: Faker::Quote.unique.matz,
                 email: Faker::Internet.unique.email,
-                password: Faker::Internet.unique.password(min_length = 8, max_length = 16, mix_case = true, special_chars = false),
+                password: "azerty#{number}",
+                password_confirmation: "azerty#{number}",
                 age: Faker::Number.within(1..60),
                 city_id: rand(City.first.id..City.last.id)
               )
@@ -130,6 +131,7 @@ p '#' * 60
                 description: "Je suis une personne qui n'existe pas",
                 email: "anony@mous.fr",
                 password: 'Anonymous',
+                password_confirmation: 'Anonymous',
                 age: 1890,
                 city_id: rand(City.first.id..City.last.id)
               )
