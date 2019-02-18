@@ -7,14 +7,12 @@
 <hr width="75%" color=white>
 <br><br>
 
+<%= form_tag url_for(action: 'update'), method: "patch" do %>
+<div class="card bg-light mx-auto text-center shadow bg-light rounded" style="max-width: 40rem;">
 
-<%= form_for @comment do |comment| %>
-  <div class="card bg-light mx-auto text-center shadow bg-light rounded" style="max-width: 40rem;">
-    <h5 class="card-header">Commentaire</h5>
-    <div class="card-body">
-      <p class="card-text"><%= comment.text_field :content %></p>
-      <hr width="30%" color=white>
-      <%= submit_tag "Mettre à jour", :class => "btn btn-info"%>
-    </div>
-  </div>
+  <h5 class="card-header"><%= label_tag 'Commentaire' %></h5>
+  <div class="card-body shadow">
+  <p class="card-text"><%= text_area_tag 'content', @comment.content %></p>
+        <hr width="30%" color=white>
+  <%= submit_tag "Mettre à jour", :class => "btn btn-info"%>
 <% end %>

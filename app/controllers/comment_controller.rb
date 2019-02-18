@@ -1,21 +1,26 @@
 class CommentController < ApplicationController
+  def show
+  	@gossip = Gossip.find(params[:gossip_id])
+  	@comment = Comment.find(params[:id])
+  end
+
   def new
     p '*' * 60
     p params
     p '*' * 60
     @comment = Comment.new()
-    @gossip = params[:format]
+    @gossip = Gossip.find(params[:gossip_id])
   end
 
   def create
     p '*' * 60
     p params
     p '*' * 60
-    @comment = Comment.new(content: params[:comment], gossip_id: params[:gossip_id], user: User.find_by(first_name: 'Anonymous'))
-
+    @gossip = Gossip.find(params[:gossip_id])
+    @comment = Comment.new(content: params[:comment], gossip: @gossip, user_id: User.find_by(first_name: 'Anonymous').id)
       if @comment.save
         flash[:success] = "Votre commentaire a été créé!"
-        redirect_to gossip_path(@gossip_id)
+        redirect_to gossip_path(params[:gossip_id])
       else
         flash[:danger] = "Une erreur est survenue, veuillez réessayer"
         render :new
@@ -27,14 +32,15 @@ class CommentController < ApplicationController
     p '*' * 60
     p params
     p '*' * 60
-    @comment = Comment.find(params[:id])
+    @gossip = Gossip.find(params[:gossip_id])
+  	@comment = Comment.find(params[:id])
   end
 
   def update
-    @comment = Comment.find(params[:id])
-    post_params = params.require(:comment).permit(:content)
+    @gossip = Gossip.find(params[:gossip_id])
+  	@comment = Comment.find(params[:id])
 
-    if @comment.update(post_params)
+    if @comment.update('content' => params[:content], 'user' => @comment.user, 'gossip' => @comment.gossip)
       flash[:success] = "Votre commentaire a été modifié!"
       redirect_to gossip_path(@comment.gossip.id)
     else

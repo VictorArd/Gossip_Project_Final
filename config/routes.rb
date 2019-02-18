@@ -6,8 +6,9 @@ Rails.application.routes.draw do
   resources :contact, only: [:index]
   resources :welcome, only: [:show]
 
-  resources :gossip
-  resources :comment
+  resources :gossip do
+    resources :comment
+  end
   resources :user, only: [:show]
   resources :city, only: [:show]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

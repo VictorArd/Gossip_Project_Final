@@ -2,6 +2,7 @@ class GossipController < ApplicationController
   def show
     @gossip = Gossip.find(params[:id])
     @comments = Comment.all.where(gossip_id: params[:id])
+    @tags = Tag.all
   end
 
   def new
@@ -9,12 +10,14 @@ class GossipController < ApplicationController
     p params
     p '*' * 60
     @gossip = Gossip.new()
+    @tags = Tag.all
   end
 
   def create
     p '*' * 60
     p params
     p '*' * 60
+    @tags = Tag.all
     @gossip = Gossip.new(title: params[:title], content: params[:content], user: User.find_by(first_name: 'Anonymous'))
 
       if @gossip.save
