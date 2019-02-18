@@ -1,0 +1,22 @@
+<br>
+
+<h2 class="display-4 text-center">Créez votre commentaire</h2>
+<p class="lead text-center">
+  ici vous pouvez facilement créer votre commentaire associé au potin.
+</p>
+
+<hr width="75%" color=white>
+
+<br>
+
+<div class="container">
+    <%= form_tag url_for(action: 'create'), method: "post" do %>
+
+
+        <%= label_tag 'Commentaire' %>
+        <%= text_area_tag 'comment', @comment.content, :class => "form-control"%>
+<br>
+
+      <%= submit_tag "Envoyer", :class => "btn btn-info"%>
+    <% end %>
+</div>

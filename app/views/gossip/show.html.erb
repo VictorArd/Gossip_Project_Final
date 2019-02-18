@@ -1,24 +1,55 @@
 <br>
 <h2 class="display-4 text-center">Potin n°<%= @gossip.id%></h2>
 <p class="lead text-center">
-  ici tu pourras retrouver le potin que tu recherche.
+ici tu pourras retrouver le potin que tu recherche.
 </p>
 
 <hr width="75%" color=white>
 <br>
 
-  <div class="card bg-light mx-auto text-center shadow bg-light rounded" style="max-width: 40rem;">
-    <div class="card-header">Titre: <%= @gossip.title %></div>
+<div class="card bg-light mx-auto text-center shadow bg-light rounded" style="max-width: 40rem;">
+  <div class="card-header">Titre: <%= @gossip.title %></div>
+  <div class="card-body">
+    <h5 class="card-title">Contenu: <%= @gossip.content %></h5>
+      <hr width="30%" color=white>
+    <p class="card-text text-muted">Auteur: <%= link_to @gossip.user.first_name + ' ' + @gossip.user.last_name, user_path(@gossip.user.id), :class => "link text-dark"%></p>
+      <hr width="30%" color=white>
+    <p class="card-text text-muted">Ville: <%= link_to @gossip.user.city.name, city_path(@gossip.user.city.id), :class => "link text-dark"%></p>
+      <hr width="30%" color=white>
+    <p class="card-link d-inline"><%= link_to "Editer", edit_gossip_path(@gossip.id), :class => "text-info"%></p>
+    <p class="card-link inline d-inline"><%= link_to "Supprimer", gossip_path(@gossip.id), :class => "text-danger", data: { confirm: "Etes-vous sur de vouloir supprimer le potin ?", method: 'DELETE' }%></p>
+  </div>
+</div>
+
+<br>
+<hr width="75%" color=white>
+<br>
+
+<h3 class="text-center">Commentaire du potins</h3>
+<div class="lead text-center">
+  ici tu pourras retrouver tous les commentaires du potin.
+</div>
+
+<br>
+<div class="text-center"><%= link_to "Ecrire un commentaire", new_comment_path, :class => "btn btn-info link"%></div>
+
+<br>
+<hr width="75%" color=white>
+<br>
+
+<div class="container">
+  <div class="row">
+    <% @comments.each do |comment| %>
+  <div class="card w-75 mx-auto shadow bg-light" style="max-width: 100rem;">
+    <h5 class="card-header"><%= User.find(comment.user_id).first_name %> <%= User.find(comment.user_id).last_name %></h5>
     <div class="card-body">
-      <h5 class="card-title">Contenu: <%= @gossip.content %></h5>
-        <hr width="30%" color=white>
-      <p class="card-text text-muted">Auteur: <%= link_to @gossip.user.first_name + ' ' + @gossip.user.last_name, user_path(@gossip.user.id), :class => "link text-dark"%></p>
-        <hr width="30%" color=white>
-      <p class="card-text text-muted">Ville: <%= link_to @gossip.user.city.name, city_path(@gossip.user.city.id), :class => "link text-dark"%></p>
-        <hr width="30%" color=white>
-      <p class="card-link d-inline"><%= link_to "Editer", edit_gossip_path(@gossip.id), :class => "text-info"%></p>
-      <p class="card-link inline d-inline"><%= link_to "Supprimer", gossip_path(@gossip.id), :class => "text-danger", data: { confirm: "Etes-vous sur de vouloir supprimer le potin ?", method: 'DELETE' }%></p>
+      <p class="card-text"><%= comment.content %></p>
+      <p class="card-text"><%= comment.id %></p>
+      <hr width="90%" color=white>
+    <p class="card-link d-inline text-"><%= link_to "Editer", edit_comment_path(comment.id), :class => "text-info"%></p>
+    <p class="card-link d-inline"><%= link_to "Supprimer", comment_path(comment.id), :class => "text-danger", data: { confirm: "Etes-vous sur de vouloir supprimer le commentaire ?", method: 'DELETE' }%></p>
     </div>
   </div>
-
-  <br>
+  <% end %>
+</div>
+</div>

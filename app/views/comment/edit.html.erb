@@ -1,0 +1,20 @@
+<br>
+<h2 class="display-4 text-center">Editer ton commentaire</h2>
+<p class="lead text-center">
+  ici tu pourras éditer facilement ton commentaire.
+</p>
+
+<hr width="75%" color=white>
+<br><br>
+
+
+<%= form_for @comment do |comment| %>
+  <div class="card bg-light mx-auto text-center shadow bg-light rounded" style="max-width: 40rem;">
+    <h5 class="card-header">Commentaire</h5>
+    <div class="card-body">
+      <p class="card-text"><%= comment.text_field :content %></p>
+      <hr width="30%" color=white>
+      <%= submit_tag "Mettre à jour", :class => "btn btn-info"%>
+    </div>
+  </div>
+<% end %>
