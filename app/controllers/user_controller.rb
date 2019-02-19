@@ -1,4 +1,5 @@
 class UserController < ApplicationController
+  before_action :authenticate_user, only: [:show, :new, :create]
   def show
     @user = User.find(params[:id])
   end
@@ -27,6 +28,7 @@ class UserController < ApplicationController
                     )
 
     if @user.save
+      session[:user_id] = @user.id
       flash[:success] = "Votre compte a été créé avec succès!"
       redirect_to :root
     else
@@ -34,4 +36,13 @@ class UserController < ApplicationController
       render :new
     end
   end
+
+  private
+
+    def authenticate_user
+      unless current_user
+        flash[:danger] = "Connectez-vous pour accéder à la page de l'utilisateur"
+        redirect_to new_session_path
+      end
+    end
 end

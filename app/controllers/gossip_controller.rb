@@ -61,4 +61,13 @@ before_action :authenticate_user, only: [:new, :create, :edit, :destroy]
     end
   end
 
+  private
+
+    def authenticate_user
+      unless current_user
+        flash[:danger] = "Connectez-vous pour accéder à la page des potins"
+        redirect_to new_session_path
+      end
+    end
+
 end
