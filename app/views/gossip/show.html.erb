@@ -20,9 +20,11 @@ ici tu pourras retrouver le potin que tu recherche.
       <%= tag.title %><br /><br />
       <% end %>
 
-      <hr width="30%" color=white>
-    <p class="card-link d-inline"><%= link_to "Editer", edit_gossip_path(@gossip.id), :class => "text-info"%></p>
-    <p class="card-link inline d-inline"><%= link_to "Supprimer", gossip_path(@gossip.id), :class => "text-danger", data: { confirm: "Etes-vous sur de vouloir supprimer le potin ?", method: 'DELETE' }%></p>
+      <% if is_current_author(@gossip.user[:id]) %>
+        <hr width="30%" color=white>
+        <p class="card-link d-inline"><%= link_to "Editer", edit_gossip_path(@gossip.id), :class => "text-info"%></p>
+        <p class="card-link inline d-inline"><%= link_to "Supprimer", gossip_path(@gossip.id), :class => "text-danger", data: { confirm: "Etes-vous sur de vouloir supprimer le potin ?", method: 'DELETE' }%></p>
+      <% end %>
   </div>
 </div>
 
@@ -36,7 +38,14 @@ ici tu pourras retrouver le potin que tu recherche.
 </div>
 
 <br>
-<div class="text-center"><%= link_to "Ecrire un commentaire", new_gossip_comment_path(@gossip.id), :class => "btn btn-info link"%></div>
+
+<% if current_user %>
+  <div class="text-center"><%= link_to "Ecrire un commentaire", new_gossip_comment_path(@gossip.id), :class => "btn btn-info link"%></div>
+<% else %>
+  <div class="text-center">
+    <button class="btn btn-info disabled">Ecrire un commentaire</button>
+  </div>
+<% end %>
 
 <br>
 <hr width="75%" color=white>
@@ -49,10 +58,13 @@ ici tu pourras retrouver le potin que tu recherche.
     <h5 class="card-header"><%= User.find(c.user_id).first_name %> <%= User.find(c.user_id).last_name %></h5>
     <div class="card-body">
       <p class="card-text"><%= c.content %></p>
-      <p class="card-text"><%= c.id %></p>
+
+    <% if is_current_author(c.user[:id]) %>
       <hr width="90%" color=white>
-    <p class="card-link d-inline text-"><%= link_to "Editer", edit_gossip_comment_path(@gossip.id, c.id), :class => "text-info"%></p>
-    <p class="card-link d-inline"><%= link_to "Supprimer", gossip_comment_path(@gossip.id, c.id), :class => "text-danger", data: { confirm: "Etes-vous sur de vouloir supprimer le commentaire ?", method: 'DELETE' }%></p>
+      <p class="card-link d-inline text-"><%= link_to "Editer", edit_gossip_comment_path(@gossip.id, c.id), :class => "text-info"%></p>
+      <p class="card-link d-inline"><%= link_to "Supprimer", gossip_comment_path(@gossip.id, c.id), :class => "text-danger", data: { confirm: "Etes-vous sur de vouloir supprimer le commentaire ?", method: 'DELETE' }%></p>
+    <% end %>
+
     </div>
   </div>
   <% end %>

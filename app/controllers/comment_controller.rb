@@ -1,4 +1,6 @@
 class CommentController < ApplicationController
+  before_action :authenticate_user, only: [:new, :create, :edit, :destroy]
+
   def show
   	@gossip = Gossip.find(params[:gossip_id])
   	@comment = Comment.find(params[:id])
@@ -17,7 +19,7 @@ class CommentController < ApplicationController
     p params
     p '*' * 60
     @gossip = Gossip.find(params[:gossip_id])
-    @comment = Comment.new(content: params[:comment], gossip: @gossip, user_id: User.find_by(first_name: 'Anonymous').id)
+    @comment = Comment.new(content: params[:comment], gossip: @gossip, user_id: current_user.id)
       if @comment.save
         flash[:success] = "Votre commentaire a été créé!"
         redirect_to gossip_path(params[:gossip_id])

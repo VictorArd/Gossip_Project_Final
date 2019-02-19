@@ -1,13 +1,21 @@
 <br>
+<% if current_user %>
+<h2 class="display-4 text-center">Bienvenue <%= current_user.first_name %></h2>
+<% else %>
 <h2 class="display-4 text-center">Bienvenue sur la page des potins</h2>
+<% end %>
 <p class="lead text-center">
   ici tu pourras retrouver tous les potins du site internet.
 </p>
 
 <hr width="75%" color=white>
-
-<div class="text-center"><%= link_to "Créez votre potin", new_gossip_path, :class => "btn btn-info link"%></div>
-
+  <% if current_user %>
+    <div class="text-center"><%= link_to "Créez votre potin", new_gossip_path, :class => "btn btn-info link"%></div>
+  <% else %>
+    <div class="text-center">
+      <button class="btn btn-info disabled">Créez votre potin</button>
+    </div>
+  <% end %>
 <hr width="75%" color=white>
 <br>
 <div class="container">

@@ -10,6 +10,7 @@
   </head>
 
   <body>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
     <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
       <%= link_to root_path do %>
          <%= image_tag "https://image.noelshack.com/fichiers/2019/07/5/1550243990-brand-logo.png", :class => "navbar-brand",:width => "100", :height => "60", :alt => "LogoGossip" %>
@@ -22,6 +23,9 @@
           <%= link_to "Team", team_index_path, class: "nav-item nav-link text-light" %>
           <%= link_to "Contact", contact_index_path, class: "nav-item nav-link text-light" %>
         </div>
+        <% if current_user %>
+        <i class="fas fa-sign-out-alt ml-auto"></i><%= link_to "Se déconnecter", session_path(session[:user_id]), method: :delete, :class => 'nav-item nav-link text-light' %>
+        <% else %>
         <div class="dropdown ml-auto">
           <button class="btn btn-light btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             S'inscrire / Se connecter
@@ -29,9 +33,10 @@
           <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
             <%= link_to 'INSCRIPTION', new_user_path, class: "dropdown-item ml-auto"%>
             <hr width="50%" color=white>
-            <%= link_to 'SE CONNECTER', team_index_path, class: "dropdown-item ml-auto"%>
+            <%= link_to 'SE CONNECTER', new_session_path, class: "dropdown-item ml-auto"%>
           </div>
         </div>
+        <% end %>
       </div>
     </nav>
 
