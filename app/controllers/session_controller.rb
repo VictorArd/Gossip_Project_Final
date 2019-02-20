@@ -11,7 +11,11 @@ class SessionController < ApplicationController
   	@user = User.find_by(email: params[:email])
   	# on vérifie si l'utilisateur existe bien ET si on arrive à l'authentifier (méthode bcrypt) avec le mot de passe
   	if @user && @user.authenticate(params[:password])
-    	session[:user_id] = @user.id
+    	log_in @user
+
+      ###Non fonctionnel###
+      #params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+
       flash[:info] = 'Vous êtes connecté avec succès'
     	redirect_to root_path
     	# redirige où tu veux, avec un flash ou pas
@@ -22,7 +26,7 @@ class SessionController < ApplicationController
 	end
 
   def destroy
-  session.delete(:user_id)
+  log_out if logged_in?
   flash[:info] = 'Vous êtes déconnecté'
   redirect_to root_path
   end
