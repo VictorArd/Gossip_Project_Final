@@ -11,11 +11,15 @@
 <br>
 
 <div class="mx-auto" style="width: 400px">
-  <%= form_tag url_for(action: 'create'), method: "post", class: "text-center" do %>
+  <%= form_tag url_for(action: 'create'), method: "post" do %>
 
       <%= text_field_tag 'email', nil, type: "email", class: "form-control mb-3", placeholder: "E-mail" %>
 
       <%= text_field_tag 'password', nil, type: "password", class: "form-control mb-4", placeholder: "Mot de passe" %>
+
+      <!--###Non fonctionnel###-->
+      <%= check_box_tag(:remember_me) %>
+      <%= label_tag(:remember_me, "Se souvenir de mes informations") %>
 
       <%= submit_tag "Connection", class: "btn btn-info btn-block my-4", type: "submit" %>
 
