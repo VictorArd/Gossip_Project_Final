@@ -20,7 +20,7 @@
 <br>
 <div class="container">
      <div class="row">
-       <% @gossips.each do |gossip| %>
+       <% @gossips.order(:id).reverse.each do |gossip| %>
          <div class="col-md-4">
            <div class="card text-center shadow bg-light rounded" style="width: 20rem;">
              <div class="bg-light">

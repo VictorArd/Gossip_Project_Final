@@ -48,9 +48,14 @@
       </div>
     <% end %>
 
-    <%= yield %>
 
+
+    <%= yield %>
     <div class="container">
+
+      <br>
+      <div class="text-center"><%= link_to "Retour à la page principal", root_path, :class => "btn btn-secondary btn-sm link"%></div>
+
       <hr width="75%" color=white>
       <footer class="footer text-center">
         <div class="container">
