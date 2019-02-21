@@ -18,11 +18,6 @@
         <%= label_tag 'Contenu' %>
         <%= text_area_tag 'content', @gossip.content, :class => "form-control"%>
 <br>
-
-        <%= label_tag 'Tag' %>
-        <br>
-        <%= select_tag 'tag', options_for_select(@tags.collect{ |u| [u.title, u.id] })%>
-<br>
 <br>
 
       <%= submit_tag "Envoyer", :class => "btn btn-info"%>

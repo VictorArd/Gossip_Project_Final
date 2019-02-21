@@ -15,10 +15,7 @@ ici tu pourras retrouver le potin que tu recherche.
     <p class="card-text text-muted">Auteur: <%= link_to @gossip.user.first_name + ' ' + @gossip.user.last_name, user_path(@gossip.user.id), :class => "link text-dark"%></p>
       <hr width="30%" color=white>
 
-      <h5>Tags :</h5>
-      <% @gossip.tags.each do |tag| %>
-      <%= tag.title %><br /><br />
-      <% end %>
+    <p class="card-text small text-muted"><%= @gossip.created_at.strftime("Crée le %-d-%m-%Y à %Hh%M") %></p>
 
       <% if is_current_author(@gossip.user[:id]) %>
         <hr width="30%" color=white>
@@ -58,6 +55,7 @@ ici tu pourras retrouver le potin que tu recherche.
     <h5 class="card-header"><%= User.find(c.user_id).first_name %> <%= User.find(c.user_id).last_name %></h5>
     <div class="card-body">
       <p class="card-text"><%= c.content %></p>
+      <p class="card-text small text-muted"><%= c.created_at.strftime("Crée le %-d-%m-%Y à %Hh%M") %></p>
 
     <% if is_current_author(c.user[:id]) %>
       <hr width="90%" color=white>
