@@ -16,6 +16,9 @@
       <hr width="30%" color=white>
       <h5 class="card-text"><span class="font-weight-bold">Email: </span> <span class="text-dark small"> <%= @user.email %> </span></h5>
       <hr width="30%" color=white>
-      <h5 class="card-text"><span class="font-weight-bold">Ville: </span> <span> <%= link_to @user.city.name, city_path(@user.city.id), :class => "text-dark small link" %> </span></h5>    
+      <h5 class="card-text"><span class="font-weight-bold">Ville: </span> <span> <%= link_to @user.city.name, city_path(@user.city.id), :class => "text-dark small link" %> </span></h5>
     </div>
   </div>
+
+  <br>
+  <div class="text-center"><%= link_to "Retour à la page principal", root_path, :class => "btn btn-secondary btn-sm link"%></div>
